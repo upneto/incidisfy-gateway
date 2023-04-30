@@ -20,9 +20,11 @@ public class ReclamacaoPayload {
 	private String codigo;
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date dataCriacao;
-	private long codigoCliente;
-	private int codigoCategoria;
-	private long codigoProduto;
-	private String descricao;
+	private Long codigoCliente;
+	private Integer codigoCategoria;
+	private Long codigoProduto;
+	private String descricao;	
+	private Boolean statusAberto;
+	private Boolean reincidente;
 	
 }
