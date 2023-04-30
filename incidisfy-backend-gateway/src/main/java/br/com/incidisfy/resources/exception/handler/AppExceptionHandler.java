@@ -1,5 +1,7 @@
 package br.com.incidisfy.resources.exception.handler;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -44,7 +46,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ExceptionResponsePayload.builder()
 				.code(HttpStatus.UNAUTHORIZED.value())
 				.description(HttpStatus.UNAUTHORIZED.name())
-				.exception(exception.getMessage())
+				.exception(exception)
 				.build());
 	}
 	
@@ -63,7 +65,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionResponsePayload.builder()
 				.code(HttpStatus.BAD_REQUEST.value())
 				.description(HttpStatus.UNAUTHORIZED.name())
-				.exception(exception.getMessage())
+				.exception(exception)
 				.build());
 	}
 	
@@ -82,7 +84,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ExceptionResponsePayload.builder()
 				.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
 				.description(HttpStatus.UNAUTHORIZED.name())
-				.exception(exception.getMessage())
+				.exception(exception)
 				.build());
 	}	
 	
@@ -101,7 +103,26 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(exception.getStatusCode()).body(ExceptionResponsePayload.builder()
 				.code(exception.getStatusCode().value())
 				.description(exception.getStatusCode().name())
-				.exception(exception.getMessage())
+				.exception(exception)
+				.build());
+	}	
+	
+	/**
+	 * Manipulador de exceção para erros do tipo 'AppException'
+	 * @param exception
+	 * @param request
+	 * @return
+	 */
+	@ExceptionHandler(InvocationTargetException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+	public final ResponseEntity<ExceptionResponsePayload> handleAppExceptions(InvocationTargetException exception, WebRequest request){		
+		LOGGER.error("=> Error type: " + WebServiceException.class.getName());
+		LOGGER.error("=> Error msg: " + exception.getMessage());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body(ExceptionResponsePayload.builder()
+				.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+				.description(HttpStatus.INTERNAL_SERVER_ERROR.name())
+				.exception(exception)
 				.build());
 	}	
 }
