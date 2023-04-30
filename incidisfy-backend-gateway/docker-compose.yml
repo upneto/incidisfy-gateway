@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  app_gateway:
+    image: backend/app_gateway:1.0
+    container_name: app_gateway
+    restart: on-failure    
+    env_file: ./.env
+    build: ./     
+    ports:      
+      - $APP_GATEWAY_LOCAL_PORT:$APP_GATEWAY_DOCKER_PORT    
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
