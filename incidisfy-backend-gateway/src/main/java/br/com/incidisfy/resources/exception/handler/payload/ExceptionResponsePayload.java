@@ -15,5 +15,5 @@ public class ExceptionResponsePayload {
 
 	private int code;
 	private String description;
-	private Exception exception;
+	private Throwable exception;
 }

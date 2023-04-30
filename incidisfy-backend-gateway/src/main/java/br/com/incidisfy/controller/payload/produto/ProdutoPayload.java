@@ -17,7 +17,7 @@ import lombok.Setter;
 @Builder
 public class ProdutoPayload {
 
-	private long codigo;
+	private Long codigo;
 	
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date dataCriacao;

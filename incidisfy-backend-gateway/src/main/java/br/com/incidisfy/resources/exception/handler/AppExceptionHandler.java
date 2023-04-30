@@ -46,7 +46,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ExceptionResponsePayload.builder()
 				.code(HttpStatus.UNAUTHORIZED.value())
 				.description(HttpStatus.UNAUTHORIZED.name())
-				.exception(exception)
+				.exception(exception.getCause())
 				.build());
 	}
 	
@@ -65,7 +65,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionResponsePayload.builder()
 				.code(HttpStatus.BAD_REQUEST.value())
 				.description(HttpStatus.UNAUTHORIZED.name())
-				.exception(exception)
+				.exception(exception.getCause())
 				.build());
 	}
 	
@@ -83,8 +83,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		LOGGER.error("=> Error msg: " + exception.getMessage());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ExceptionResponsePayload.builder()
 				.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-				.description(HttpStatus.UNAUTHORIZED.name())
-				.exception(exception)
+				.description(exception.getMessage())
 				.build());
 	}	
 	
@@ -103,7 +102,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(exception.getStatusCode()).body(ExceptionResponsePayload.builder()
 				.code(exception.getStatusCode().value())
 				.description(exception.getStatusCode().name())
-				.exception(exception)
+				.exception(exception.getCause())
 				.build());
 	}	
 	
@@ -122,7 +121,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body(ExceptionResponsePayload.builder()
 				.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
 				.description(HttpStatus.INTERNAL_SERVER_ERROR.name())
-				.exception(exception)
+				.exception(exception.getCause())
 				.build());
 	}	
 }
