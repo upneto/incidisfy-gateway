@@ -24,7 +24,7 @@ public class ProdutoService extends AbstractService {
 	 * 		'env' = variavel injetada da runtime jvm
 	 * 		'.url.backend.ordem_servico' = arquivo application.properties  
 	 */
-	@Value("${${env}.url.backend.produto}")
+	@Value("${${spring.profiles.active}.url.backend.produto}")
 	private String url = null;
 	
 	/**

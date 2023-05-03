@@ -75,9 +75,10 @@ public abstract class AbstractService {
 	 */
 	@SuppressWarnings("unchecked")
 	protected <RESPONSE> List<RESPONSE> doGetList(String url, Class<RESPONSE> responseClass, Entry<String, Object>... params) throws WebServiceException {
-		try {
-			LOGGER.info("Executando API: findAll " + this.getClass().getSimpleName());
-			
+		LOGGER.info("Executando API: findAll " + this.getClass().getSimpleName());
+		LOGGER.info("Endpoint: " + url);
+
+		try {			
 			List<RESPONSE> responseList = new ArrayList<>();
 			
 			StringBuilder finalUrl = new StringBuilder(url);
@@ -108,8 +109,10 @@ public abstract class AbstractService {
 	 */
 	@SuppressWarnings("unchecked")
 	protected <RESPONSE> RESPONSE doGet(String url, Class<RESPONSE> responseClass, Entry<String, Object>... params) throws WebServiceException {
+		LOGGER.info("Executando API: doGet " + this.getClass().getSimpleName());
+		LOGGER.info("Endpoint: " + url);
+
 		try {
-			LOGGER.info("Executando API: doGet " + this.getClass().getSimpleName());
 			StringBuilder finalUrl = new StringBuilder(url);
 			if(params != null && params.length > 0) {
 				finalUrl.append("?").append(this.buildParans(params));
@@ -132,8 +135,10 @@ public abstract class AbstractService {
 	 * @throws WebServiceException 
 	 */
 	protected <BODY> void doPost(String url, BODY body) throws WebServiceException {
-		try {
-			LOGGER.info("Executando API: doPost " + this.getClass().getSimpleName());
+		LOGGER.info("Executando API: doPost " + this.getClass().getSimpleName());
+		LOGGER.info("Endpoint: " + url);
+
+		try {			
 			HttpHeaders headers = this.buildHeaders();
 			HttpEntity<BODY> request = new HttpEntity<>(body, headers);
 			rest.exchange(url, HttpMethod.POST, request, Object.class);
@@ -152,8 +157,10 @@ public abstract class AbstractService {
 	 * @throws WebServiceException 
 	 */
 	protected <RESPONSE, BODY> List<RESPONSE> doPostList(String url, Class<RESPONSE> responseClass, BODY body) throws WebServiceException {
-		try {
-			LOGGER.info("Executando API: doPostList " + this.getClass().getSimpleName());
+		LOGGER.info("Executando API: doPostList " + this.getClass().getSimpleName());
+		LOGGER.info("Endpoint: " + url);
+
+		try {			
 			List<RESPONSE> responseList = new ArrayList<>();		
 			HttpHeaders headers = this.buildHeaders();
 			HttpEntity<BODY> request = new HttpEntity<>(body, headers);
@@ -179,8 +186,10 @@ public abstract class AbstractService {
 	 * @throws WebServiceException 
 	 */
 	protected <RESPONSE, BODY> RESPONSE doPost(String url, Class<RESPONSE> responseClass, BODY body) throws WebServiceException {
+		LOGGER.info("Executando API: doPost " + this.getClass().getSimpleName());
+		LOGGER.info("Endpoint: " + url);
+
 		try {
-			LOGGER.info("Executando API: doPost " + this.getClass().getSimpleName());
 			HttpHeaders headers = this.buildHeaders();
 			HttpEntity<BODY> request = new HttpEntity<>(body, headers);
 			return rest.exchange(url, HttpMethod.POST, request, responseClass).getBody();
@@ -200,8 +209,10 @@ public abstract class AbstractService {
 	 * @throws WebServiceException 
 	 */
 	protected <BODY> void doPut(String url, BODY body) throws WebServiceException {
+		LOGGER.info("Executando API: doPut " + this.getClass().getSimpleName());
+		LOGGER.info("Endpoint: " + url);
+
 		try {
-			LOGGER.info("Executando API: doPut " + this.getClass().getSimpleName());
 			HttpHeaders headers = this.buildHeaders();
 			HttpEntity<BODY> request = new HttpEntity<>(body, headers);
 			rest.exchange(url, HttpMethod.PUT, request, Object.class);
@@ -217,8 +228,10 @@ public abstract class AbstractService {
 	 * @throws WebServiceException 
 	 */
 	protected void doDelete(String url) throws WebServiceException {
+		LOGGER.info("Executando API: doDelete " + this.getClass().getSimpleName());
+		LOGGER.info("Endpoint: " + url);
+
 		try {
-			LOGGER.info("Executando API: doDelete " + this.getClass().getSimpleName());
 			HttpHeaders headers = this.buildHeaders();
 			HttpEntity<String> request = new HttpEntity<>("body", headers);
 			rest.exchange(url, HttpMethod.DELETE, request, Object.class);

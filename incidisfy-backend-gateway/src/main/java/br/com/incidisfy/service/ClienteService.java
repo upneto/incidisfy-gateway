@@ -24,7 +24,7 @@ public class ClienteService extends AbstractService {
 	 * 		'env' = variavel injetada da runtime jvm
 	 * 		'.url.backend.ordem_servico' = arquivo application.properties  
 	 */
-	@Value("${${env}.url.backend.cliente}")
+	@Value("${${spring.profiles.active}.url.backend.cliente}")
 	private String url = null;
 	
 	/**

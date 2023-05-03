@@ -24,7 +24,7 @@ public class ReclamacaoService extends AbstractService {
 	 * 		'env' = variavel injetada da runtime jvm
 	 * 		'.url.backend.ordem_servico' = arquivo application.properties  
 	 */
-	@Value("${${env}.url.backend.reclamacao}")
+	@Value("${${spring.profiles.active}.url.backend.reclamacao}")
 	private String url = null;
 	
 	/**

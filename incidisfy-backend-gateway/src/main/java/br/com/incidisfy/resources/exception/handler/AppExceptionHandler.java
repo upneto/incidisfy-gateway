@@ -97,7 +97,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
 	public final ResponseEntity<ExceptionResponsePayload> handleAppExceptions(HttpClientErrorException exception, WebRequest request){		
-		LOGGER.error("=> Error type: " + WebServiceException.class.getName());
+		LOGGER.error("=> Error type: " + HttpClientErrorException.class.getName());
 		LOGGER.error("=> Error msg: " + exception.getMessage());
 		return ResponseEntity.status(exception.getStatusCode()).body(ExceptionResponsePayload.builder()
 				.code(exception.getStatusCode().value())
@@ -116,7 +116,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
 	public final ResponseEntity<ExceptionResponsePayload> handleAppExceptions(InvocationTargetException exception, WebRequest request){		
-		LOGGER.error("=> Error type: " + WebServiceException.class.getName());
+		LOGGER.error("=> Error type: " + InvocationTargetException.class.getName());
 		LOGGER.error("=> Error msg: " + exception.getMessage());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body(ExceptionResponsePayload.builder()
 				.code(HttpStatus.INTERNAL_SERVER_ERROR.value())

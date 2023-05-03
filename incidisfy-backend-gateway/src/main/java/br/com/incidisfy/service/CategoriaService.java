@@ -24,7 +24,7 @@ public class CategoriaService extends AbstractService {
 	 * 		'env' = variavel injetada da runtime jvm
 	 * 		'.url.backend.ordem_servico' = arquivo application.properties  
 	 */
-	@Value("${${env}.url.backend.categoria}")
+	@Value("${${spring.profiles.active}.url.backend.categoria}")
 	private String url = null;
 	
 	/**
