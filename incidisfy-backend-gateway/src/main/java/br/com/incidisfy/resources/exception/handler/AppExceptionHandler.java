@@ -45,7 +45,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 		LOGGER.error("=> Error msg: " + exception.getMessage());
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ExceptionResponsePayload.builder()
 				.code(HttpStatus.UNAUTHORIZED.value())
-				.description(HttpStatus.UNAUTHORIZED.name())
+				.description(exception.getMessage())
 				.exception(exception.getCause())
 				.build());
 	}

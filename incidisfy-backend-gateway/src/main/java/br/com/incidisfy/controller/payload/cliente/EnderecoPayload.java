@@ -1,9 +1,5 @@
 package br.com.incidisfy.controller.payload.cliente;
 
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,13 +18,11 @@ import lombok.Setter;
 @Builder
 public class EnderecoPayload {
 
-	private Long id;
+	private Long codigo;
 	private String bairro;
 	private String cep;
 	private String cidade;
-	private String complemento;
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Date dataCriacao;
+	private String complemento;	
 	private String estado;
 	private String numero;
 	private String pais;

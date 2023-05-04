@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,13 @@ public class ReclamacaoController {
 	@Autowired
 	private ReclamacaoService service;
 	
-	@ApiOperation(value = "Pesquisa todos os Veiculos")
+	/**
+	 * 
+	 * @return
+	 * @throws WebServiceException
+	 * @throws BusinessException
+	 */
+	@ApiOperation(value = "Pesquisa todas as reclamações")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna lista de Veiculos"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
@@ -37,24 +44,53 @@ public class ReclamacaoController {
 		return new ResponseEntity<>(this.service.findAll(), HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "Pesquisa Veiculo por ID")
+	/**
+	 * 
+	 * @return
+	 * @throws WebServiceException
+	 * @throws BusinessException
+	 */
+	@ApiOperation(value = "Pesquisa reclamação por ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna Veiculo"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
 	@GetMapping(value = "/{id}", produces="application/json", consumes="application/json")
-	public ResponseEntity<ReclamacaoPayload> findBy(@PathVariable long id) throws WebServiceException, BusinessException {
-		return new ResponseEntity<>(this.service.findBy(id), HttpStatus.OK);
+	public ResponseEntity<ReclamacaoPayload> findBy(@PathVariable long codigo) throws WebServiceException, BusinessException {
+		return new ResponseEntity<>(this.service.findBy(codigo), HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "Altera Veiculo")
+	/**
+	 * 
+	 * @return
+	 * @throws WebServiceException
+	 * @throws BusinessException
+	 */
+	@ApiOperation(value = "Insere reclamação")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Alterou Veiculo com sucesso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
+	@PostMapping(produces="application/json", consumes="application/json")
+	public ResponseEntity<?> insert(@RequestBody ReclamacaoPayload reclamacao) throws WebServiceException, BusinessException {
+		this.service.insert(reclamacao);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @throws WebServiceException
+	 * @throws BusinessException
+	 */
+	@ApiOperation(value = "Altera reclamação")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Alterou Veiculo com sucesso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
 	@PutMapping(produces="application/json", consumes="application/json")
-	public ResponseEntity<?> update(@RequestBody ReclamacaoPayload pessoa) throws WebServiceException, BusinessException {
-		this.service.update(pessoa);
+	public ResponseEntity<?> update(@RequestBody ReclamacaoPayload reclamacao) throws WebServiceException, BusinessException {
+		this.service.update(reclamacao);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
