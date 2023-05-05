@@ -9,7 +9,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod       
     ports:      
-      - 8080:9088
+      - 8080:8080
     volumes:
       - .m2:/root/.m2
     stdin_open: true
